@@ -1,22 +1,30 @@
+{$, TextEditorView, View} = require 'atom-space-pen-views'
+
 module.exports =
-class CppClassView
-  constructor: (serializedState) ->
-    # Create root element
-    @element = document.createElement('div')
-    @element.classList.add('cpp-class')
+class CppClassView extends View
+    constructor: (serializedState) ->
+        # Create root element
+        @element = document.createElement('div')
+        @element.classList.add('cpp-class')
 
-    # Create message element
-    message = document.createElement('div')
-    message.textContent = "The CppClass package is Alive! It's ALIVE!"
-    message.classList.add('message')
-    @element.appendChild(message)
+        # Create message element
+        message = document.createElement('div')
+        message.textContent = "The CppClass package is Alive! It's ALIVE!"
+        message.classList.add('message')
+        @element.appendChild(message)
 
-  # Returns an object that can be retrieved when package is activated
-  serialize: ->
+    @content: ->
+        @div class: 'cpp-class', =>
+            @subview 'miniEditor', new TextEditorView(mini: true)
+            @div class: 'error', outlet: 'error'
+            @div class: 'message', outlet: 'message'
 
-  # Tear down any state and detach
-  destroy: ->
-    @element.remove()
+    # Returns an object that can be retrieved when package is activated
+    serialize: ->
 
-  getElement: ->
-    @element
+    # Tear down any state and detach
+    destroy: ->
+        @element.remove()
+
+    getElement: ->
+        @element
