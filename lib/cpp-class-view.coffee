@@ -2,16 +2,10 @@
 
 module.exports =
 class CppClassView extends View
-    constructor: (serializedState) ->
-        # Create root element
-        @element = document.createElement('div')
-        @element.classList.add('cpp-class')
+    initialize: ->
+        console.log('in the cpp-class-view intialize')
 
-        # Create message element
-        message = document.createElement('div')
-        message.textContent = "The CppClass package is Alive! It's ALIVE!"
-        message.classList.add('message')
-        @element.appendChild(message)
+        @command_subscription = atom.commands.add 'atom-workspace', 'cpp-class:toggle': => @show()
 
     @content: ->
         @div class: 'cpp-class', =>
@@ -19,12 +13,35 @@ class CppClassView extends View
             @div class: 'error', outlet: 'error'
             @div class: 'message', outlet: 'message'
 
+    toggle: ->
+        console.log('toggling cpp-class')
+        if @panel.isVisible()
+            @hide()
+        else
+            @show()
+
+    show: ->
+        console.log('showing panel')
+        @create_file_panel()
+        @panel.show()
+
+    hide: ->
+        console.log('hiding panel')
+        @panel.hide()
+
+    create_file_panel: ->
+        @panel ?= atom.workspace.addModalPanel(item: this, visible: false)
+        console.log("creating panel, setting the message")
+        @message.text("Enter C++ Class name")
+        @miniEditor.focus()
+
     # Returns an object that can be retrieved when package is activated
     serialize: ->
 
     # Tear down any state and detach
     destroy: ->
-        @element.remove()
+        @panel?.destroy()
+        @command_subscription.dispose()
 
     getElement: ->
         @element
