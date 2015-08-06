@@ -6,7 +6,7 @@
   "keywords": [
   ],
   "activationCommands": {
-    "atom-workspace": "cpp-class:toggle"
+    "atom-workspace": "cpp-class:create"
   },
   "repository": "https://github.com/atom/cpp-class",
   "license": "MIT",

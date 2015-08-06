@@ -7,7 +7,7 @@ module.exports =
 class CppClassView extends View
     previously_focused: null
     initialize: ->
-        @command_subscription = atom.commands.add 'atom-workspace', 'cpp-class:toggle': => @show()
+        @command_subscription = atom.commands.add 'atom-workspace', 'cpp-class:create': => @show()
 
         # @miniEditorClassName.on 'blur', => @close()
         atom.commands.add @element,
