@@ -2,7 +2,7 @@
   "name": "cpp-class",
   "main": "./lib/cpp-class",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "A simple tool to create C++ classes",
   "keywords": [
   ],
   "activationCommands": {
