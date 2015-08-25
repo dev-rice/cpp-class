@@ -48,6 +48,7 @@ class CppClassView extends View
     confirm: ->
         typed = @get_class_name()
         @create_class_files(typed)
+        @open_class_files(typed)
         @hide()
 
     get_class_name: ->
@@ -72,6 +73,15 @@ class CppClassView extends View
         cpp_path = path.join(directory, @get_cpp_name(class_name))
         fs.writeFile(hpp_path, @get_hpp_content(class_name))
         fs.writeFile(cpp_path, @get_cpp_content(class_name))
+
+    open_class_files: (class_name) ->
+        directory = @get_directory_name()
+        mkdirp(directory)
+
+        hpp_path = path.join(directory, @get_header_name(class_name))
+        cpp_path = path.join(directory, @get_cpp_name(class_name))
+        atom.workspace.open(hpp_path)
+        atom.workspace.open(cpp_path)
 
     get_header_name: (class_name) ->
         "#{class_name}.hpp"
