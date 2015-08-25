@@ -48,7 +48,7 @@ class CppClassView extends View
     confirm: ->
         typed = @get_class_name()
         @create_class_files(typed)
-        @open_class_files(typed)
+        # @open_class_files(typed)
         @hide()
 
     get_class_name: ->
